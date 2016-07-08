@@ -129,8 +129,8 @@ form:
             highlight: 1
             default: 1
             options:
-                1. Enabled
-                2. Disabled
+                1: Enabled
+                2: Disabled
             validate:
                 type: bool
         social_pages.show_text:
