@@ -1,0 +1,5 @@
+{% if config.plugins.aboutme.social_pages.enabled %}
+<div class="sidebar-content" {% if not config.plugins.aboutme.social_pages.display %}style="display: none;"{% endif %}>
+    {% include 'partials/aboutme_social.html.twig' %}
+</div>
+{% endif %}

@@ -1,5 +1,4 @@
-{% if config.plugins.aboutme.social_pages.enabled %}
-<div class="about-me h-card" style="text-align: center; {% if not config.plugins.aboutme.social_pages.display %}display: none;{% endif %}">
+<div class="about-me about-me-social h-card">
 	{% set src = aboutme_picture_src %}
 	{% set author_url = base_url == '' ? '/' : base_url %}
     {% set author = "<a rel='author' class='p-name u-url' href='" ~ author_url ~ "'>" ~ aboutme_name ~ "</a>" %}
@@ -20,4 +19,3 @@
     {% endfor %}
     </div>
 </div>
-{% endif %}
