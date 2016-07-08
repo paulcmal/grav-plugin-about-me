@@ -123,6 +123,26 @@ form:
                 0: Disabled
             validate:
                 type: bool
+        social_pages.display:
+            type: toggle
+            label: Show/hide social pages. Hiding them makes them machine-parsable while invisible to humans (for design concerns).
+            highlight: 1
+            default: 1
+            options:
+                1. Enabled
+                2. Disabled
+            validate:
+                type: bool
+        social_pages.show_text:
+            type: toggle
+            label: Displays description text for social pages
+            highlight: 1
+            default: 0
+            options:
+                1: Enabled
+                0: Disabled
+            validate:
+                type: bool
         social_pages.use_font_awesome:
             type: toggle
             label: Use Font Awesome (Only if your theme does not use it already)

@@ -59,6 +59,8 @@ gravatar:
 
 social_pages:
   enabled: true                     # Enables social network pages
+  display: true                     # Show/hide social pages. Hiding them makes them machine-parsable while invisible to humans (for design concerns).
+  show_text: false                  # Displays description text for social pages
   use_font_awesome: false           # Use FontAwesome, enable this option only if FontAwesome is not loaded by your theme or another plugin
   pages:                            # Your social network pages here ! Change the order at will by changing the default position value. You can also change the font icon and the title
     facebook:
@@ -125,7 +127,10 @@ It's pretty straight forward actually, just include the partial template from th
 ## Social media links
 
 If you'd like to add your social media accounts, add to your template:
-```{% include 'partials/aboutme_social.html.twig' %}```
+```
+{% if config.plugins.aboutme.enable and config.plugins.aboutme.enable_social %}
+    {% include 'partials/aboutme_social.html.twig' %}
+```
 
 For example, for integration within [Antimatter](https://github.com/getgrav/grav-theme-antimatter)'s sidebar, add to the `partials/sidebar.html.twig:
 ```
