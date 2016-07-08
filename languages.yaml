@@ -1,0 +1,12 @@
+en:
+  PLUGIN_ABOUTME:
+    SOCIAL_ALSO_ON: %s is also available on…
+    PUBLISHED_BY: Published by %s.
+fr:
+  PLUGIN_ABOUTME:
+    SOCIAL_ALSO_ON: %s est aussi sur…
+    PUBLISHED_BY: Publié par %s.
+de:
+  PLUGIN_ABOUTME:
+    SOCIAL_ALSO_ON: %s ist auch auf…
+    PUBLISHED_BY: Von %s herausgebracht.

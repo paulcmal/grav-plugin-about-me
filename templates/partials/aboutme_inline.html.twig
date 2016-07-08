@@ -1,5 +1,9 @@
-{% set src = aboutme_picture_src %}
-{% if not config.plugins.aboutme.gravatar.enabled %}
-	{% set src = uri.rootUrl(false) ~ (uri.rootUrl(false) == '/' ? '' : '/') ~ aboutme_picture_src %}
+{% if config.plugins.aboutme.enable_item_authorship %}
+    {% set src = aboutme_picture_src %}
+    {% if not config.plugins.aboutme.gravatar.enabled %}
+	    {% set src = uri.rootUrl(false) ~ (uri.rootUrl(false) == '/' ? '' : '/') ~ aboutme_picture_src %}
+    {% endif %}
+    <div {% if not config.plugins.aboutme.display_item_authorship %} style="display:none" {% endif %}class="h-card p-author">
+        <img class="u-photo" src="{{ src }}" alt="Profile picture" height="40" />&nbsp;&nbsp;{{ "PLUGIN.ABOUTME.PUBLISHED_BY"|t("<a rel='author' class='p-name u-url' href='{{ base_url == '' ? '/' : base_url }}'>{{ aboutme_name }}</a>")
+    </div>
 {% endif %}
-<div {% if not config.plugins.aboutme.display_on_items %} style="display:none" {% endif %}class="h-card p-author"><img class="u-photo" src="{{ src }}" alt="Profile picture" height="40" />&nbsp;&nbsp;Published by <a rel="author" class="p-name u-url" href="{{ base_url == '' ? '/' : base_url }}">{{ aboutme_name }}</a>.</div>
