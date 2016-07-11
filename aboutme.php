@@ -48,19 +48,16 @@ class AboutMePlugin extends Plugin
     public function onTwigSiteVariables()
     {
         $twig = $this->grav['twig'];
-        $twig->twig_vars['aboutme_name'] = $this->config->get('plugins.aboutme.name');
-        $twig->twig_vars['aboutme_title'] = $this->config->get('plugins.aboutme.title');
-        $twig->twig_vars['aboutme_description'] = $this->config->get('plugins.aboutme.description');
-        $twig->twig_vars['aboutme_picture_src'] = $this->config->get('plugins.aboutme.gravatar.enabled') ? 
-            $this->getGravatarUrl() : $this->config->get('plugins.aboutme.picture_src');
-        if (is_array($twig->twig_vars['aboutme_picture_src'])) { // grav 1.1 gives an array instead of a simple string
-            $twig->twig_vars['aboutme_picture_src'] = key($twig->twig_vars['aboutme_picture_src']);
-        }
+        $avatar = $this->config->get('plugins.aboutme.picture_src');
+        $avatar = $this->grav['base_url_absolute'] . is_array($avatar) ? key($avatar) : $avatar;
+        $twig->twig_vars['avatar'] = $this->config->get('plugins.aboutme.gravatar.enabled')
+            ? $this->getGravatarUrl() : $this->grav['base_url'] . $avatar;
+        
         $pages =  $this->config->get('plugins.aboutme.social_pages.pages');
         uasort($pages, function($a, $b) {
             return $a['position'] < $b['position'] ? -1 : $a['position'] == $b['position'] ? 0 : 1;
         });
-        $twig->twig_vars['aboutme_pages'] = $pages;
+        $twig->twig_vars['social_pages'] = $pages;
     }
 
     /**
@@ -77,10 +74,7 @@ class AboutMePlugin extends Plugin
     private function getGravatarUrl()
     {
         $gravatar = $this->config->get('plugins.aboutme.gravatar');
-        $url = '//www.gravatar.com/avatar/';
-        $url .= md5(strtolower(trim($gravatar['email'])));
-        $url .= '?s=' . $gravatar['size'];
-        return $url;
+        return '//www.gravatar.com/avatar/' . md5(strtolower(trim($gravatar['email']))) . '?s=' . $gravatar['size'];
     }
 
     public function onAssetsInitialized()
@@ -88,6 +82,7 @@ class AboutMePlugin extends Plugin
         if ($this->config->get('plugins.aboutme.built_in_css')) {
             $this->grav['assets']->add('plugin://aboutme/assets/css/aboutme.css');
         }
+        
         if ($this->config->get('plugins.aboutme.social_pages.use_font_awesome')) {
             $this->grav['assets']->add('plugin://aboutme/assets/css/font-awesome.min.css');
         }
