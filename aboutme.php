@@ -80,9 +80,10 @@ class AboutMePlugin extends Plugin
     public function onAssetsInitialized()
     {
         if ($this->config->get('plugins.aboutme.built_in_css')) {
-            $this->grav['assets']->add('plugin://aboutme/assets/css/aboutme.css');
+            $theme_css = "plugin://aboutme/assets/css/aboutme_$(this->config->get('system.pages.theme')).css";
+            $this->grav['assets']->add(stream_resolve_include_path($theme_css) ? $theme_css : "plugin://aboutme/assets/css/aboutme_antimatter.css");
         }
-        
+
         if ($this->config->get('plugins.aboutme.social_pages.use_font_awesome')) {
             $this->grav['assets']->add('plugin://aboutme/assets/css/font-awesome.min.css');
         }

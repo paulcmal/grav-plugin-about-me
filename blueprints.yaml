@@ -123,6 +123,16 @@ form:
                 0: Disabled
             validate:
                 type: bool
+        sidebar.center:
+            type: toggle
+            label: Center wiget
+            highlight: 1
+            default: 0
+            options:
+                1: Enabled
+                0: Disabled
+            validate:
+                type: bool
         sidebar.avatar:
             type: toggle
             label: Display avatar
@@ -401,3 +411,67 @@ form:
                             default: 1
                             validate:
                                 type: Number
+                gitlab:
+                    type: tab
+                    title: Gitlab
+                    fields:
+                        social_pages.pages.gitlab.icon:
+                            type: text
+                            size: small
+                            label: Font Awesome Icon
+                            default: gitlab
+                            validate:
+                                type: text
+                        social_pages.pages.gitlab.url:
+                            type: url
+                            label: Your Gitlab Profile URL
+                            validate:
+                                type: url
+                        social_pages.pages.gitlab.title:
+                            type: text
+                            label: Title when icon hovered (optional)
+                            default: Gitlab
+                            validate:
+                                type: text
+                        social_pages.pages.gitlab.position:
+                            type: text
+                            size: x-small
+                            label: Position
+                            default: 1
+                            validate:
+                                type: Number
+                email:
+                    type: tab
+                    title: e-mail
+                    fields:
+                        social_pages.pages.email.icon:
+                            type: text
+                            size: small
+                            label: Font Awesome Icon
+                            default: instagram
+                            validate:
+                                type: text
+                        social_pages.pages.email.url:
+                            type: text
+                            label: Your e-mail address
+                            validate:
+                                type: email
+                        social_pages.pages.email.title:
+                            type: text
+                            label: Title when icon hovered (optional)
+                            default: e-mail
+                            validate:
+                                type: text
+                        social_pages.pages.email.position:
+                            type: text
+                            size: x-small
+                            label: Position
+                            default: 1
+                            validate:
+                                type: Number
+                        social_pages.pages.email.template:
+                            type: text
+                            label: Associated template
+                            default: email
+                            validate:
+                                type: text
