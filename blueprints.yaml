@@ -109,6 +109,71 @@ form:
             validate:
                 type: number
                 min: 50
+        Sidebar:
+            type: section
+            title: Sidebar
+            underline: true
+        sidebar.show:
+            type: toggle
+            label: Enable about-me in sidebar
+            highlight: 1
+            default: 1
+            options:
+                1: Enabled
+                0: Disabled
+            validate:
+                type: bool
+        sidebar.avatar:
+            type: toggle
+            label: Display avatar
+            highlight: 1
+            default: 1
+            options:
+                1: Enabled
+                0: Disabled
+            validate:
+                type: bool
+        sidebar.name:
+            type: toggle
+            label: Display name
+            highlight: 1
+            default: 1
+            options:
+                1: Enabled
+                0: Disabled
+            validate:
+                type: bool
+        sidebar.title:
+            type: toggle
+            label: Display title
+            highlight: 1
+            default: 1
+            options:
+                1: Enabled
+                0: Disabled
+            validate:
+                type: bool
+        sidebar.description:
+            type: toggle
+            label: Display description
+            highlight: 1
+            default: 1
+            options:
+                1: Enabled
+                0: Disabled
+            validate:
+                type: bool
+        sidebar.social_pages:
+            type: toggle
+            label: Display social pages
+            highlight: 1
+            default: 1
+            options:
+                1: Enabled
+                0: Disabled
+            validate:
+                type: bool
+
         Social Pages:
             type: section
             title: Social Pages

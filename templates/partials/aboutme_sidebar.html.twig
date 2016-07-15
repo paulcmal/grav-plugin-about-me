@@ -1,5 +1,25 @@
-{% if config.plugins.aboutme.social_pages.enabled %}
-<div class="sidebar-content" {% if not config.plugins.aboutme.social_pages.display %}style="display: none;"{% endif %}>
-    {% include 'partials/aboutme_social.html.twig' %}
+<div class="sidebar-content {{ config.plugins.aboutme.sidebar.show ? '' : 'invisible' }}">
+    <div class="about-me about-me-social h-card">
+        {% if aboutme_avatar %}
+	    <a href="{{ base_url ? base_url : '/' }}" class="u-url {{ config.plugins.aboutme.sidebar.avatar ? '' : 'invisible' }}"><img src="{{ aboutme_avatar }}" title="{{ config.plugins.aboutme.name }}" alt="Profile picture" class="u-photo" /><br />
+	    {% endif %}
+	    {% if config.plugins.aboutme.name %}
+	    <h4 class="{{ config.plugins.aboutme.sidebar.name ? '' : 'invisible' }}">{{ config.plugins.aboutme.name }}</h4><br />
+	    {% endif %}
+	    {% if config.plugins.aboutme.title and config.plugins.aboutme.sidebar.title %}
+	    <h5 class="{{ config.plugins.aboutme.sidebar.title }} ? '' : 'invisible }}">{{ config.plugins.aboutme.title }}</h5><br />
+	    {% endif %}
+	    {% if config.plugins.aboutme.description %}
+	    <p class="p-note {{ config.plugins.aboutme.sidebar.description ? '' : 'invisible'}}">{{ config.plugins.aboutme.description }}</p>
+	    {% endif %}
+	    {% if config.plugins.aboutme.social_pages.enabled %}
+        <div class="social-pages {{ config.plugins.aboutme.sidebar.social_pages ? '' : 'invisible' }}">
+        {% for page in aboutme_pages %}
+            {% if page.url|length %}
+            <a href="{{ page.url }}" {{ page.title ? 'title="' ~ page.title ~ '"' }} target="_blank" rel="me" class="u-url"><i class="fa fa-2x fa-{{ page.icon }}"></i></a>
+            {% endif %}
+        {% endfor %}
+        {% endif %}
+    </div>
 </div>
-{% endif %}
+</div>

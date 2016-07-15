@@ -15,6 +15,14 @@ gravatar:
   email: "example@test.com"         # The email address your gravatar is attached to
   size: 100                         # The size of your gravatar
 
+sidebar:
+  show: true
+  avatar: true
+  name: true
+  title: true
+  description: true
+  social_pages: true
+
 social_pages:
   enabled: true                     # Enables social network pages
   display: true                     # Show/hide social pages. Hiding them makes them machine-parsable while invisible to humans (for design concerns).

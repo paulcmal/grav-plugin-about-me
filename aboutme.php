@@ -49,15 +49,15 @@ class AboutMePlugin extends Plugin
     {
         $twig = $this->grav['twig'];
         $avatar = $this->config->get('plugins.aboutme.picture_src');
-        $avatar = $this->grav['base_url_absolute'] . is_array($avatar) ? key($avatar) : $avatar;
-        $twig->twig_vars['avatar'] = $this->config->get('plugins.aboutme.gravatar.enabled')
-            ? $this->getGravatarUrl() : $this->grav['base_url'] . $avatar;
+        $avatar = '/' . (is_array($avatar) ? key($avatar) : $avatar);
+        $twig->twig_vars['aboutme_avatar'] = $this->config->get('plugins.aboutme.gravatar.enabled')
+            ? $this->getGravatarUrl() : $avatar;
         
         $pages =  $this->config->get('plugins.aboutme.social_pages.pages');
         uasort($pages, function($a, $b) {
             return $a['position'] < $b['position'] ? -1 : $a['position'] == $b['position'] ? 0 : 1;
         });
-        $twig->twig_vars['social_pages'] = $pages;
+        $twig->twig_vars['aboutme_pages'] = $pages;
     }
 
     /**
