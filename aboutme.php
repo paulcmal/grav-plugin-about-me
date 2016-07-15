@@ -49,7 +49,7 @@ class AboutMePlugin extends Plugin
     {
         $twig = $this->grav['twig'];
         $avatar = $this->config->get('plugins.aboutme.picture_src');
-        $avatar = '/' . (is_array($avatar) ? key($avatar) : $avatar);
+        $avatar = $this->grav['base_url'] . (is_array($avatar) ? key($avatar) : $avatar);
         $twig->twig_vars['aboutme_avatar'] = $this->config->get('plugins.aboutme.gravatar.enabled')
             ? $this->getGravatarUrl() : $avatar;
         
