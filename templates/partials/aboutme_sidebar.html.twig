@@ -1,7 +1,7 @@
 <div class="sidebar-content {{ config.plugins.aboutme.sidebar.show ? '' : 'invisible' }} {{ config.plugins.aboutme.sidebar.center ? 'center' : '' }}">
     <div class="about-me about-me-social h-card">
         {% if aboutme_avatar %}
-	    <a href="{{ base_url ? base_url : '/' }}" class="u-url {{ config.plugins.aboutme.sidebar.avatar ? '' : 'invisible' }}"><img src="{{ aboutme_avatar }}" title="{{ config.plugins.aboutme.name }}" alt="Profile picture" class="u-photo" /></a><br />
+	    <a href="{{ base_url ? base_url : '/' }}" class="u-url {{ config.plugins.aboutme.sidebar.avatar ? '' : 'invisible' }}"><img src="/{{ aboutme_avatar }}" title="{{ config.plugins.aboutme.name }}" alt="Profile picture" class="u-photo" /></a><br />
 	    {% endif %}
 	    {% if config.plugins.aboutme.name %}
 	    <h4 class="p-name {{ config.plugins.aboutme.sidebar.name ? '' : 'invisible' }}">{{ config.plugins.aboutme.name }}</h4>
