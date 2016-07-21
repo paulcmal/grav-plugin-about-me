@@ -1,9 +1,11 @@
 <?php
 
 /* TODO
-    - backends
+    - remoteUserDB backends
         - gravUsers
             - let users edit their avatar
+            - implement addUser to be used on taxonomy additions
+    - remoteUserBackend backends
         - web
             - method for fetching remote author from URL
             - parse mf2, fallback to parsing twitter profile with twitter:site if set
@@ -16,7 +18,8 @@
     - templates
         - finish action templates (published/action)
     - caching
-        - update active authors cache when a new author taxonomy is found
+        - update authorDB cache when a new entry is found in taxonomy 'author'
+        - update aboutMeUsers cache when about-me config is modified
 */
 
 /*  DONE
@@ -24,10 +27,12 @@
         - generate Identicon if author doesn't have an avatar
         - pre-load inline/block template as variable for caching
     - backends
-        - gravUsers
-            - fecthes from user/accounts (YAML)
-        - aboutme config
-            - fecthes from aboutme plugin config
+        - remoteUserDB backends
+            - gravUsers
+                - fecthes from Grav user accounts (user/accounts YAML files)
+        - remoteUserBackend backends
+            - aboutme config
+                - fecthes from aboutme plugin config
     - caching
         - active authors are cached
             - generated from 'author' taxonomy

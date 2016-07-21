@@ -4,6 +4,10 @@ namespace Grav\Plugin;
 
 use Grav\Common\Grav;
 
+/*
+    aboutMeUser is a class of users expected to be described with at least a name, a URL and an avatar.
+    If no avatar was passed as argument, one will be generated using https://github.com/yzalis/Identicon
+*/
 class aboutMeUser {
     public $name;
     public $url;
@@ -14,30 +18,46 @@ class aboutMeUser {
     public $inline;
     public $block;
 
-    public function __construct($array) {
-        $this->name = isset($array['name']) ? $array['name'] : '';
-        $this->url = isset($array['url']) ? $array['url'] : '';
+
+    /*
+        __construct($config)
+            $config[]:
+                - name: username
+                - url: userpage URL
+                - avatar (optional): user avatar (if none, replaced by an identicon)
+                - title (optional): user title
+                - description (optional): user description
+                - social_pages[] (optional): array of info about user's social pages
+        Class constructor.
+                
+    */    
+    public function __construct($config) {
+        // Name and URL are the only two mandatory parameters
+        if (!isset($config['name']) || !isset($config['url'])) {
+            return null;
+        }
+        $this->name = $config['name'];
+        $this->url = $config['url'];
         $this->avatar = isset($array['avatar']) ? $array['avatar'] : $this->genAvatar();
         $this->title = isset($array['title']) ? $array['title'] : '';
         $this->description = isset($array['description']) ? $array['description'] : '';
         $this->social_pages = isset($array['social_pages']) ? $array['social_pages'] : [];
-        // Generate full-visibility inline and block templates for caching
-        $this->inline = $this->inline();
-        $this->block = $this->block();
+
+        // Pre-load inline and block templates (with no hidden values) to be cached
+        $twig = Grav::instance['twig'];
+        $this->inline = $twig->processTemplate('partials/author/inline.html.twig', ['author' => $this]);
+        $this->block = $twig->processTemplate('partials/author/block.html.twig', ['author' => $this]);
     }
     
-    public function inline() {
-        return Grav::instance()['twig']->processTemplate('partials/author/inline.html.twig', ['author' => $this]);
-    }
-    
-    public function block() {
-        return Grav::instance()['twig']->processTemplate('partials/author/block.html.twig', ['author' => $this]);
-    }
-    
+    /*
+        genAvatar() returns string
+            $config[]: not used yet
+        Generate inline SVG Identicon with username as parameter
+        Output can be directly embedded in an <img src="">
+    */
     public function genAvatar($config = []) {
         $identicon = new \Identicon\Identicon(new \Identicon\Generator\SvgGenerator());
-        $imageDataUri = $identicon->getImageDataUri($this->name);
-        return $imageDataUri;
+        return $identicon->getImageDataUri($this->name);
     }
 }
 ?>

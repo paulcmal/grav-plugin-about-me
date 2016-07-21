@@ -9,6 +9,13 @@ class gravUsers implements remoteUserDB {
     public $users;
     static $instance;
     
+    /*
+        __construct($config)
+            $config[]:
+                - users[] : list of usernames to generate with
+        Class constructor.
+                
+    */    
     public function __construct($config = []) {
         $this->users = [];
         if (isset($config['users'])) {
@@ -18,7 +25,11 @@ class gravUsers implements remoteUserDB {
         }
     }
     
-    // Allow only one instance of gravUsers
+    /*
+        instance($config) returns gravUsers
+            $config: config passed to __construct() upon instantiation
+        Returns the only active gravUsers instance (constructs it if needed)
+    */
     public static function instance($config) {
         if (!isset(static::$instance)) {
             static::$instance = new static($config);
@@ -26,17 +37,30 @@ class gravUsers implements remoteUserDB {
         return static::$instance;
     }
     
+    /*
+        getUsers($config) returns Array(aboutMeUser)
+            $config: not used yet
+        Returns an array of aboutMeUser objects,
+        One for all the authors gravUsers was constructed for.
+    */
     public function getUsers($config = []) {
         return $this->users;
     }
     
+    /*
+        getUser($identifier, $config) returns aboutMeUser or null
+            $identifier: user unique id (string)
+            $config: not used yet
+        Returns an aboutMeUser object for the $identifier user,
+        Generated from Grav user files (user/accounts).
+    */    
     public function getUser($identifier = '', $config = []) {
         $grav = Grav::instance();
         // Grav only supports small-case usernames
         $identifier = strtolower($identifier);
         // Code taken from Grav\Common\User load(), simplified
         if (!$account = $grav['locator']->findResource('account://' . $identifier . YAML_EXT)) {
-            // The user does not exist
+            // If the file does 
             return null;
         }
         $account_file = CompiledYamlFile::instance($account);
@@ -55,10 +79,14 @@ class gravUsers implements remoteUserDB {
                 'social_pages' => []
             ];
             $user = new aboutMeUser($array);
-            // Save to cache
+            // Save object to cache
             $cache->save("gravUser-$identifier-$timestamp", $user);
         }
         return $user;
+    }
+    
+    public function addUser($identifier = '', $config = []) {
+        // TO BE IMPLEMENTED
     }
 }
 ?>

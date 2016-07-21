@@ -1,8 +1,4 @@
 {# Must be summoned with author object and visibility array, both are passed on to author/block.html.twig #}
 <div class="sidebar-content{{ hide.all ? ' invisible' : '' }}">
     {% include 'partials/author/block.html.twig' with {'author_class': "sidebar"} %}
-    <br>Grav authors<br>
-    {% for i in authors %}
-        {{ i.name }}<br>
-    {% endfor %}
 </div>

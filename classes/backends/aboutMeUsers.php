@@ -8,9 +8,17 @@ class aboutMeUsers implements remoteUserBackend {
     public $user;
     static $instance;
 
+    /*
+        __construct($config)
+            $config[]: not yet used
+        Class constructor.
+                
+    */    
     public function __construct($config = []) {
         $grav = Grav::instance();
+        
         $cache = $grav['cache'];
+        // Need to refresh the cache 
         if (!$this->user = $cache->fetch('aboutMeUser')) {
             $config = $grav['config'];
             // Figure out avatar URL
@@ -38,7 +46,11 @@ class aboutMeUsers implements remoteUserBackend {
         }
     }
     
-    // Allow only one instance()
+    /*
+        instance($config) returns gravUsers
+            $config: config passed to __construct() upon instantiation
+        Returns the only active gravUsers instance (constructs it if needed)
+    */
     public static function instance($config) {
         if (!isset(static::$instance)) {
             static::$instance = new static($config);
@@ -46,6 +58,12 @@ class aboutMeUsers implements remoteUserBackend {
         return static::$instance;
     }
     
+    /*
+        getUser() returns aboutMeUser
+            $identifier: not used, as aboutme config only has one user
+            $config: not yet used
+        Returns aboutMeuser generated from plugin config
+    */
     public function getUser($identifier = '', $config = []) {
         return $this->user;
     }
