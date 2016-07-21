@@ -32,13 +32,25 @@
 	margin-left: 10px;
 }
 
-.h-entry .h-card .u-photo {
+/*.about-me-published a img {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+}*/
+
+.about-me-published {
+    display: inline;
+}
+
+.list-item .list-blog-header .about-me-published img {
     display: table-cell;
     vertical-align: middle;
     margin-top: 0;
-    margin-bottom: 0.5em;
     -webkit-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
 	        box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+}
+
+.about-me-inline {
+    display: inline;
 }
 
 .center {

@@ -70,6 +70,11 @@ form:
             label: Description
             validate:
                 type: textarea
+        backend:
+            type: text
+            label: Default backend (only grav available at the moment)
+            validate:
+                type: grav
         Profile Picture:
             type: section
             title: Profile Picture
@@ -113,19 +118,19 @@ form:
             type: section
             title: Sidebar
             underline: true
-        sidebar.show:
+        sidebar.all:
             type: toggle
-            label: Enable about-me in sidebar
+            label: Hide about-me in sidebar
             highlight: 1
-            default: 1
+            default: 0
             options:
-                1: Enabled
-                0: Disabled
+                1: Hide
+                0: Show
             validate:
                 type: bool
         sidebar.center:
             type: toggle
-            label: Center wiget
+            label: Center sidebar about-me
             highlight: 1
             default: 0
             options:
@@ -135,52 +140,52 @@ form:
                 type: bool
         sidebar.avatar:
             type: toggle
-            label: Display avatar
+            label: Hide avatar
             highlight: 1
-            default: 1
+            default: 0
             options:
-                1: Enabled
-                0: Disabled
+                1: Hide
+                0: Show
             validate:
                 type: bool
         sidebar.name:
             type: toggle
-            label: Display name
+            label: Hide name
             highlight: 1
-            default: 1
+            default: 0
             options:
-                1: Enabled
-                0: Disabled
+                1: Hide
+                0: Show
             validate:
                 type: bool
         sidebar.title:
             type: toggle
-            label: Display title
+            label: Hide title
             highlight: 1
-            default: 1
+            default: 0
             options:
-                1: Enabled
-                0: Disabled
+                1: Hide
+                0: Show
             validate:
                 type: bool
         sidebar.description:
             type: toggle
-            label: Display description
+            label: Hide description
             highlight: 1
-            default: 1
+            default: 0
             options:
-                1: Enabled
-                0: Disabled
+                1: Hide
+                0: Show
             validate:
                 type: bool
         sidebar.social_pages:
             type: toggle
-            label: Display social pages
+            label: Hide social pages
             highlight: 1
-            default: 1
+            default: 0
             options:
-                1: Enabled
-                0: Disabled
+                1: Hide
+                0: Show
             validate:
                 type: bool
 

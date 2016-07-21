@@ -1,0 +1,21 @@
+<div class="about-me about-me-block{{ author_class ? ' about-me-' ~ author_class : '' }} h-card{{ hide.all ? ' invisible' : '' }}{{ hide.center ? ' center' : '' }}">
+    {% if author.avatar %}
+    <a href="{{ author.url ? author.url : '/' }}" class="u-url{{ hide.avatar ? ' invisible' : '' }}"><img src="{{ author.avatar }}" title="{{ author.name }}" alt="Profile picture" class="u-photo" /></a><br />
+    {% endif %}
+    <h4 class="p-name{{ hide.name ? ' invisible' : '' }}">{{ author.name }}</h4>
+    {% if author.title %}
+    <h5 class="p-job-title{{ hide.title ? ' invisible' : '' }}">{{ author.title }}</h5>
+    {% endif %}
+    {% if author.description %}
+    <div class="p-note{{ hide.description ? ' invisible' : ''}}">{{ author.description|markdown }}</div>
+    {% endif %}
+    {% if author.social_pages %}
+    <div class="social-pages{{ hide.social_pages ? ' invisible' : '' }}">
+    {% for page in author.social_pages %}
+        {% if page.url|length %}
+        {% include 'partials/social_pages/' ~ page.template|default('default') ~ '.html.twig' %}
+        {% endif %}
+    {% endfor %}
+    </div>
+    {% endif %}
+</div>

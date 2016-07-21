@@ -1,18 +1,60 @@
 <?php
 
+/* TODO
+    - backends
+        - gravUsers
+            - let users edit their avatar
+        - web
+            - method for fetching remote author from URL
+            - parse mf2, fallback to parsing twitter profile with twitter:site if set
+        - XMPP
+            - ask server for Jabber vCard
+            - see linkmauve.fr for a JS implementation
+    - CSS
+        - fix antimatter integration
+        - write other stylesheets?
+    - templates
+        - finish action templates (published/action)
+    - caching
+        - update active authors cache when a new author taxonomy is found
+*/
+
+/*  DONE
+    - author
+        - generate Identicon if author doesn't have an avatar
+        - pre-load inline/block template as variable for caching
+    - backends
+        - gravUsers
+            - fecthes from user/accounts (YAML)
+        - aboutme config
+            - fecthes from aboutme plugin config
+    - caching
+        - active authors are cached
+            - generated from 'author' taxonomy
+        - backends
+            - gravUsers
+                - each user entry is cached
+*/
+
 namespace Grav\Plugin;
+
+require_once __DIR__ . '/classes/aboutMeUser.php';
+require_once __DIR__ . '/classes/authorDB.php';
 
 use Grav\Common\Data\Blueprints;
 use Grav\Common\Plugin;
 use Grav\Common\Page\Page;
 use RocketTheme\Toolbox\Event\Event;
+use Grav\Common\Grav;
 
 /**
  * Class AboutMePlugin
  * @package Grav\Plugin
  */
+
 class AboutMePlugin extends Plugin
 {
+
     /**
      * @return array
      */
@@ -32,6 +74,14 @@ class AboutMePlugin extends Plugin
             $this->active = false;
             return;
         }
+        
+        $grav = Grav::instance();
+        $this->config = $grav['config'];
+        $taxonomies = $this->config->get('site.taxonomies');
+        if (!isset($taxonomies['author'])) {
+            $taxonomies[] = 'author';
+            $this->config->set('site.taxonomies', $taxonomies);
+        }
 
         if ($this->config->get('plugins.aboutme.enabled')) {
             $this->enable([
@@ -46,18 +96,11 @@ class AboutMePlugin extends Plugin
      * Set variables for the template
      */
     public function onTwigSiteVariables()
-    {
-        $twig = $this->grav['twig'];
-        $avatar = $this->config->get('plugins.aboutme.picture_src');
-        $avatar = $this->grav['base_url'] . (is_array($avatar) ? key($avatar) : $avatar);
-        $twig->twig_vars['aboutme_avatar'] = $this->config->get('plugins.aboutme.gravatar.enabled')
-            ? $this->getGravatarUrl() : $avatar;
-        
-        $pages =  $this->config->get('plugins.aboutme.social_pages.pages');
-        uasort($pages, function($a, $b) {
-            return $a['position'] < $b['position'] ? -1 : $a['position'] == $b['position'] ? 0 : 1;
-        });
-        $twig->twig_vars['aboutme_pages'] = $pages;
+    { 
+        $authors = authorDB::instance();
+        $this->grav["twig"]->twig_vars['aboutme'] = $authors->backends['aboutme']->getUser();
+        $this->grav["twig"]->twig_vars['authors'] = $authors->backend->getUsers();
+        $this->grav["twig"]->twig_vars['author_backends'] = $authors->backends;
     }
 
     /**
@@ -66,15 +109,6 @@ class AboutMePlugin extends Plugin
     public function onTwigTemplatePaths()
     {
         $this->grav['twig']->twig_paths[] = __DIR__ . '/templates';
-    }
-
-    /**
-    * Get the profile picture based on the gravatar config
-    **/
-    private function getGravatarUrl()
-    {
-        $gravatar = $this->config->get('plugins.aboutme.gravatar');
-        return '//www.gravatar.com/avatar/' . md5(strtolower(trim($gravatar['email']))) . '?s=' . $gravatar['size'];
     }
 
     public function onAssetsInitialized()
@@ -89,3 +123,4 @@ class AboutMePlugin extends Plugin
         }
     }
 }
+

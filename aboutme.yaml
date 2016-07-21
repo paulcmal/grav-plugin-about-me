@@ -5,6 +5,8 @@ name: 'Santa Claus'         # Your full name
 title: 
 description: 
 
+backend: grav
+
 enable_item_authorship: false # Enable/disable authorship information on items (such as blog articles)
 display_item_authorship: false # Show/hide authorship information on items. Hiding them makes them machine-parsable while invisible to humans (for design concerns).
 
@@ -16,12 +18,12 @@ gravatar:
   size: 100                         # The size of your gravatar
 
 sidebar:
-  show: true
-  avatar: true
-  name: true
-  title: true
-  description: true
-  social_pages: true
+  all: false
+  avatar: false
+  name: false
+  title: false
+  description: false
+  social_pages: false
 
 social_pages:
   enabled: true                     # Enables social network pages
