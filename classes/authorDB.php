@@ -35,9 +35,9 @@ class authorDB {
     }
     
     /*
-        instance($config) returns gravUsers
+        instance($config) returns authorDB
             $config: config passed to __construct() upon instantiation
-        Returns the only active gravUsers instance (constructs it if needed)
+        Returns the only active authorDB instance (constructs it if needed)
     */
     public static function instance($config = []) {
         if (!isset(static::$instance)) {

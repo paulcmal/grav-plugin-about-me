@@ -4,6 +4,8 @@ namespace Grav\Plugin;
 
 use Grav\Common\Grav;
 
+require_once __DIR__ . '/../vendor/autoload.php';
+
 /*
     aboutMeUser is a class of users expected to be described with at least a name, a URL and an avatar.
     If no avatar was passed as argument, one will be generated using https://github.com/yzalis/Identicon
@@ -32,19 +34,20 @@ class aboutMeUser {
                 
     */    
     public function __construct($config) {
+        $array = $config;
         // Name and URL are the only two mandatory parameters
-        if (!isset($config['name']) || !isset($config['url'])) {
+        if (!isset($array['name']) || !isset($array['url'])) {
             return null;
         }
-        $this->name = $config['name'];
-        $this->url = $config['url'];
+        $this->name = $array['name'];
+        $this->url = $array['url'];
         $this->avatar = isset($array['avatar']) ? $array['avatar'] : $this->genAvatar();
         $this->title = isset($array['title']) ? $array['title'] : '';
         $this->description = isset($array['description']) ? $array['description'] : '';
         $this->social_pages = isset($array['social_pages']) ? $array['social_pages'] : [];
 
         // Pre-load inline and block templates (with no hidden values) to be cached
-        $twig = Grav::instance['twig'];
+        $twig = Grav::instance()['twig'];
         $this->inline = $twig->processTemplate('partials/author/inline.html.twig', ['author' => $this]);
         $this->block = $twig->processTemplate('partials/author/block.html.twig', ['author' => $this]);
     }

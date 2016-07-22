@@ -66,6 +66,7 @@ class gravUsers implements remoteUserDB {
         $account_file = CompiledYamlFile::instance($account);
         $timestamp = $account_file->modified();
         $cache = $grav['cache'];
+        $config = $grav['config'];
         // If data is not cached for the current file timestamp, generate it
         if (!$user = $cache->fetch("gravUser-$identifier-$timestamp")) {
             $content = $account_file->content();
@@ -75,7 +76,7 @@ class gravUsers implements remoteUserDB {
                 'name' => $identifier,
                 'title' => isset($content['title']) ? $content['title'] : '',
                 'descrition' => isset($content['description']) ? $content['description'] : '',
-                'url' => $grav['base_url'] . '/author/' . $identifier,
+                'url' => $grav['base_url'] . '/author' . $config->get('system.param_sep') . $identifier,
                 'social_pages' => []
             ];
             $user = new aboutMeUser($array);

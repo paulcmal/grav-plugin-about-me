@@ -4,6 +4,9 @@
     - remoteUserDB backends
         - gravUsers
             - let users edit their avatar
+            - let users have a URL
+                - if user URL is set, try to mf2 parse it
+                - if no MF2, revert to user settings with url = author page and social_page web = url
             - implement addUser to be used on taxonomy additions
     - remoteUserBackend backends
         - web
@@ -17,6 +20,7 @@
         - write other stylesheets?
     - templates
         - finish action templates (published/action)
+        - author template for user page
     - caching
         - update authorDB cache when a new entry is found in taxonomy 'author'
         - update aboutMeUsers cache when about-me config is modified

@@ -47,11 +47,11 @@ class aboutMeUsers implements remoteUserBackend {
     }
     
     /*
-        instance($config) returns gravUsers
+        instance($config) returns aboutMeUsers
             $config: config passed to __construct() upon instantiation
-        Returns the only active gravUsers instance (constructs it if needed)
+        Returns the only active aboutMeUsers instance (constructs it if needed)
     */
-    public static function instance($config) {
+    public static function instance($config = []) {
         if (!isset(static::$instance)) {
             static::$instance = new static($config);
         }
