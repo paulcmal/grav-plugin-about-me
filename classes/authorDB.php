@@ -11,7 +11,6 @@ use Grav\Common\Grav;
 class authorDB {
     public $backend;
     public $backends;
-    public $users;
     static $instance;
     
     /*
@@ -41,7 +40,7 @@ class authorDB {
     */
     public static function instance($config = []) {
         if (!isset(static::$instance)) {
-            static::$instance = new static;
+            static::$instance = new static($config);
         }
         return static::$instance;
     }
@@ -76,7 +75,7 @@ class authorDB {
             $users = [];
             $taxonomy = $grav['taxonomy']->taxonomy();
             foreach($taxonomy['author'] as $author => $value) {
-                $users[] = $author;
+                $users[$author] = '';
             }
             // Save in cache for further use
             $cache->save('activeUsers', $users);

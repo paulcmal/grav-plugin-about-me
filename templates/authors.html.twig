@@ -3,7 +3,8 @@
 {% block content %}
 	{{ page.content }}
     <div class="about-me-page center">
-	    {{ users[page.header.user].block }}
+    {% for i in users %}
+        {{ i.block }}
+    {% endfor %}
     </div>
 {% endblock %}
-

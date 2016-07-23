@@ -2,11 +2,23 @@ en:
   PLUGIN_ABOUTME:
     SOCIAL_ALSO_ON: %s is also available on…
     PUBLISHED_BY: Published by %s.
+    AUTHOR_PAGES:
+      ROUTE: authors
+      PAGE_TITLE: %1s's page
+      LIST_TITLE: Authors
 fr:
   PLUGIN_ABOUTME:
     SOCIAL_ALSO_ON: %s est aussi sur…
     PUBLISHED_BY: Publié par %s.
+    AUTHOR_PAGES:
+      ROUTE: auteur-ices
+      PAGE_TITLE: Page de %1s
+      LIST_TITLE: Auteurices
 de:
   PLUGIN_ABOUTME:
     SOCIAL_ALSO_ON: %s ist auch auf…
     PUBLISHED_BY: Von %s herausgebracht.
+    AUTHOR_PAGES:
+      ROUTE: autor-innen
+      PAGE_TITLE: Homepage von %1s
+      LIST_TITLE: Autor*innen

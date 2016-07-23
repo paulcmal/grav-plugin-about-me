@@ -19,7 +19,7 @@ class gravUsers implements remoteUserDB {
     public function __construct($config = []) {
         $this->users = [];
         if (isset($config['users'])) {
-            foreach($config['users'] as $author) {
+            foreach($config['users'] as $author => $value) {
                 $this->users[$author] = $this->getUser($author);
             }
         }
