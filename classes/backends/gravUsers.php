@@ -39,12 +39,28 @@ class gravUsers implements remoteUserDB {
     
     /*
         getUsers($config) returns Array(aboutMeUser)
-            $config: not used yet
+            $config:
+                users: array of usernames to return
         Returns an array of aboutMeUser objects,
         One for all the authors gravUsers was constructed for.
     */
     public function getUsers($config = []) {
-        return $this->users;
+        // If no userlist provided, we return the full userlist
+        if (!array_key_exists('users', $config)) {
+            return $this->users;
+        }
+        // If provided userlist is empty (like, from an empty author taxonomy header), return null
+        if (empty($config['users'])) {
+            return null;
+        }
+        $users = is_array($config['users']) ? $config['users'] : [$config['users']];
+        $array = [];
+        foreach($users as $i => $user) {
+            if (isset($this->users[$user])) {
+                $array[$user] = $this->users[$user];
+            }
+        }
+        return $array;
     }
     
     /*

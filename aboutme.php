@@ -191,11 +191,12 @@ class AboutMePlugin extends Plugin
         $twig = $this->grav['twig'];
         $twig->twig_vars['aboutme'] = $authors->backends['aboutme']->getUser();
         $twig->twig_vars['users'] = $authors->backend->getUsers();
+        $twig->twig_vars['backend'] = $authors->backend;
         $twig->twig_vars['author_backends'] = $authors->backends;
         $header = $this->grav['page']->header();
-        // TODO find a way to have always access to an authorship array in Twig
-        $authors = isset($header->taxonomy['author']) ? (is_array($header->taxonomy['author']) ? $header->taxonomy['author'] : [$header->taxonomy['author']]) : [];
-        $twig->twig_vars['authors'] = $authors;
+        // If we set authorship info here, it will only be valid for the requested page
+        // For instance, if we have a collection of blog items, they will all have same authorship info.
+        // Not a solution, we need to do this in the templates directly.
     }
 
     /**
